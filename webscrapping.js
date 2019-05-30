@@ -161,7 +161,7 @@ const webScrappingSigaa = async (usuario, senha) => {
                   const periodo = datas.length > 0 ? {inicio: datas[0], fim: datas[1]} : null
 
                   // retorna um objeto com o titulo e descrição da atividade
-                  return {titulo: titulo.trim(), periodo: periodo}
+                  return {id: Math.random().toString(), titulo: titulo.trim(), periodo: periodo}
             })
 
             // remove os objetos indesejados do array, como links de videos, links para arquivos e etc.
@@ -170,7 +170,7 @@ const webScrappingSigaa = async (usuario, senha) => {
             })
 
             // retorna um objeto com o nome da turma e um array com os objetos com as informações das atividades da turma
-            return { turma: turma, atividades: atividadesTurma}
+            return {id: Math.random().toString(), turma: turma, atividades: atividadesTurma}
         })
 
         // adiciona a turma ao array

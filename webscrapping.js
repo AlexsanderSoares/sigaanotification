@@ -34,7 +34,7 @@ const webScrappingSigaa = async (usuario, senha) => {
     console.log('Concluido!\n')
 
     // espera 1 segundo para prossguir
-    await page.waitFor(500)
+    await page.waitFor(200)
 
     console.log('Entrando no sistema...')
     
@@ -98,7 +98,7 @@ const webScrappingSigaa = async (usuario, senha) => {
     for (var i = 0; i < linksTurmas.length; i++) {
 
         // espera um segundo para continuar
-        await page.waitFor(500)
+        await page.waitFor(200)
 
         let selector = ''
         

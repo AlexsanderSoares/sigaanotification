@@ -28,7 +28,7 @@ const webScrappingSigaa = async (usuario, senha) => {
   try{
 
     // cria navegador headless
-    const browser = await puppeteer.launch({headless: false,  
+    const browser = await puppeteer.launch({headless: true,  
       'args' : [
         '--no-sandbox',
         '--disable-setuid-sandbox'
@@ -212,7 +212,7 @@ const webScrappingSigaa = async (usuario, senha) => {
         const tutor = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(9) > td:nth-child(2)').innerText
         const ira = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(12) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > div').innerText
     
-        return { foto, nome, matricula, curso, nivel, status, email, entrada, polo, tutor, ira }
+        return { foto, nome, turno, matricula, curso, nivel, status, email, entrada, polo, tutor, ira }
 
     }, foto)
 

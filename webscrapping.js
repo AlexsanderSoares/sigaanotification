@@ -11,13 +11,24 @@ const fs = require('fs')
 *
 */
 
+const entrarNoSistema = async (page) => {
+
+    console.log('Acessando o sistema...')
+
+    await page.goto('https://sigaa.ufpi.br/sigaa/verTelaLogin.do')
+
+    console.log('Concluido!');
+
+    await page.waitFor(1000)
+}
+
 // Faz webscrapping no sistema SIGAA
 const webScrappingSigaa = async (usuario, senha) => {
 
   try{
 
     // cria navegador headless
-    const browser = await puppeteer.launch({headless: true,  
+    const browser = await puppeteer.launch({headless: false,  
       'args' : [
         '--no-sandbox',
         '--disable-setuid-sandbox'
@@ -27,6 +38,8 @@ const webScrappingSigaa = async (usuario, senha) => {
     await page.setViewport({ width: 1000, height: 800 })
 
     console.log('Acessando o sistema...')
+
+    // entrarNoSistema(page);
 
     // entra na pagina de login do sigaa
     await page.goto('https://sigaa.ufpi.br/sigaa/verTelaLogin.do')
@@ -189,6 +202,7 @@ const webScrappingSigaa = async (usuario, senha) => {
 
         const nome = document.querySelector('#perfil-docente > p.info-docente > span > small > b').innerText
         const matricula = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(1) > td:nth-child(2)').innerText
+        const matricula = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(3) > td:nth-child(2)').innerText
         const curso = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(2) > td:nth-child(2)').innerText
         const nivel = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(4) > td:nth-child(2)').innerText
         const status = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(5) > td:nth-child(2)').innerText

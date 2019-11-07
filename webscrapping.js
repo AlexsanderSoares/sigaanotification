@@ -202,7 +202,7 @@ const webScrappingSigaa = async (usuario, senha) => {
 
         const nome = document.querySelector('#perfil-docente > p.info-docente > span > small > b').innerText
         const matricula = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(1) > td:nth-child(2)').innerText
-        const matricula = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(3) > td:nth-child(2)').innerText
+        const turno = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(3) > td:nth-child(2)').innerText
         const curso = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(2) > td:nth-child(2)').innerText
         const nivel = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(4) > td:nth-child(2)').innerText
         const status = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(5) > td:nth-child(2)').innerText

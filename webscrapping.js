@@ -159,7 +159,7 @@ const webScrappingSigaa = async (usuario, senha) => {
                       descricao = ""
 
                   // expressão regular para buscar data e hora dentro da descrição
-                  const regex = /[0-9]{2}\/[0-9]{2}\/[0-9]{4} às ([0-9]{2}:[0-9]{2}|[0-9]h [0-9]|[0-9]{2}h [0-9]{2}|[0-9]h [0-9]{2})/g
+                  const regex = /[0-9]{2}\/[0-9]{2}\/[0-9]{4} às ([0-9]{2}:[0-9]{2}|[0-9]h [0-9]|[0-9]{2}h [0-9]{2}|[0-9]h [0-9]{2}|[0-9]{2}h [0-9])/g
 
                   // array de datas encontradas
                   const datas = []

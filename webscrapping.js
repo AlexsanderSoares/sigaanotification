@@ -129,7 +129,7 @@ const webScrappingSigaa = async (usuario, senha) => {
         await page.waitForNavigation({ timeout: 60000 })
 
         // espera até que os os links das atividades estejam diponiveis
-        await page.waitForSelector('.item > span')
+        // await page.waitForSelector('.item > span')
 
         // espera até que o nome da turma esteja disponivel
         await page.waitForSelector('#linkNomeTurma')

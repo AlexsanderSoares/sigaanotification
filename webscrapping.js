@@ -28,7 +28,7 @@ const webScrappingSigaa = async (usuario, senha) => {
   try{
 
     // cria navegador headless
-    const browser = await puppeteer.launch({headless: true,  
+    const browser = await puppeteer.launch({headless: false,  
       'args' : [
         '--no-sandbox',
         '--disable-setuid-sandbox'
@@ -208,10 +208,21 @@ const webScrappingSigaa = async (usuario, senha) => {
         const status = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(5) > td:nth-child(2)').innerText
         const email = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(6) > td:nth-child(2)').innerText
         const entrada = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(7) > td:nth-child(2)').innerText
-        const polo = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(8) > td:nth-child(2)').innerText
-        const tutor = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(9) > td:nth-child(2)').innerText
-        const ira = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(12) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > div').innerText
-    
+        
+        var polo = ""
+        if(document.querySelector('#agenda-docente > table > tbody > tr:nth-child(8) > td:nth-child(2)') != null)
+            polo = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(8) > td:nth-child(2)').innerText
+
+        var tutor = ""
+        if(document.querySelector('#agenda-docente > table > tbody > tr:nth-child(9) > td:nth-child(2)') != null)
+            tutor = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(9) > td:nth-child(2)').innerText
+
+        var ira = ""
+        if(document.querySelector('#agenda-docente > table > tbody > tr:nth-child(10) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > div'))
+            ira = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(10) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > div').innerText
+        else    
+            ira = document.querySelector('#agenda-docente > table > tbody > tr:nth-child(12) > td > table > tbody > tr:nth-child(2) > td:nth-child(2) > div').innerText
+
         return { foto, nome, turno, matricula, curso, nivel, status, email, entrada, polo, tutor, ira }
 
     }, foto)
@@ -226,7 +237,7 @@ const webScrappingSigaa = async (usuario, senha) => {
   }catch(err){
 
 
-      return {error: err.type}
+      console.log(err);
 
   }
 

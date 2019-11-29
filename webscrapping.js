@@ -28,7 +28,7 @@ const webScrappingSigaa = async (usuario, senha) => {
   try{
 
     // cria navegador headless
-    const browser = await puppeteer.launch({headless: false,  
+    const browser = await puppeteer.launch({headless: true,  
       'args' : [
         '--no-sandbox',
         '--disable-setuid-sandbox'

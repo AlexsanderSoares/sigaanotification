@@ -1,26 +1,15 @@
 const puppeteer = require('puppeteer')
 const request = require('request')
-const fs = require('fs')
+// const fs = require('fs')
 
 
 
 /*
 *
-*   FEITO POR: ALEXSANDER SOARES
+*   DESENVOLVIDO POR: ALEXSANDER SOARES
 *   EMAIL: alexsandersoares30@gmail.com
 *
 */
-
-const entrarNoSistema = async (page) => {
-
-    console.log('Acessando o sistema...')
-
-    await page.goto('https://sigaa.ufpi.br/sigaa/verTelaLogin.do')
-
-    console.log('Concluido!');
-
-    await page.waitFor(1000)
-}
 
 // Faz webscrapping no sistema SIGAA
 const webScrappingSigaa = async (usuario, senha) => {
@@ -28,7 +17,7 @@ const webScrappingSigaa = async (usuario, senha) => {
   try{
 
     // cria navegador headless
-    const browser = await puppeteer.launch({headless: true,  
+    const browser = await puppeteer.launch({headless: false,  
       'args' : [
         '--no-sandbox',
         '--disable-setuid-sandbox'
@@ -98,19 +87,19 @@ const webScrappingSigaa = async (usuario, senha) => {
     // espera até que os links das turmas estejam disponiveis no codigo fonte
     await page.waitForSelector('#turmas-portal > table > tbody > tr > td > form > a', {timeout: 60000})
 
-    console.log('Concluido!\n')
-
     // busca todos os links das turmas que o aluno está cadastrado
     const linksTurmas = await page.evaluate(() => {
         return Array.from(document.querySelectorAll('#turmas-portal > table > tbody > tr > .descricao > form > a'))
     })
+
+    console.log('Concluido!\n')
 
     const turmas = []
 
     // acessa os links das turmas um por um e pega as informações das atividades
     for (var i = 0; i < linksTurmas.length; i++) {
 
-        // espera um segundo para continuar
+        // espera 200ms para continuar
         await page.waitFor(200)
 
         let selector = ''
@@ -226,6 +215,11 @@ const webScrappingSigaa = async (usuario, senha) => {
         return { foto, nome, turno, matricula, curso, nivel, status, email, entrada, polo, tutor, ira }
 
     }, foto)
+
+
+    //BUSCA NOTAS DO ALUNO
+    // await page.hover('#menu_form_menu_discente_j_id_jsp_1325243614_85_menu > table > tbody > tr > td:nth-child(1)');
+    // await page.click('#cmSubMenuID1 > table > tbody > tr:nth-child(2)');
 
     // encerra o navegador headless
     browser.close()

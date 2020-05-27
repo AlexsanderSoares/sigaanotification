@@ -17,7 +17,7 @@ const webScrappingSigaa = async (usuario, senha) => {
   try{
 
     // cria navegador headless
-    const browser = await puppeteer.launch({headless: true,  
+    const browser = await puppeteer.launch({headless: false,  
       'args' : [
         '--no-sandbox',
         '--disable-setuid-sandbox'
@@ -134,18 +134,21 @@ const webScrappingSigaa = async (usuario, senha) => {
             // percorre por todos os links das atividades e pega o titulo e a descrição de cada uma e adiciona a um array
             const listAtividades = [...document.querySelectorAll('.item > span')].map(elem => {
 
+                console.log(elem);
+                  if(elem.children.length === 0)
+                        return {periodo: null}
+
                   //pega o titulo da atividade
                   const titulo = elem.children[0].innerText
+
+                  let descriptionItem = elem.querySelector('.descricao-item');
+
+                  if(!descriptionItem)
+                    descriptionItem = elem.parentNode.querySelector('.descricao-item');
                   
                   let descricao = ""
-
-                  // verifica se a atividade é um forúm ou um trabalho e pega a descrição caso ela exista.
-                  if(titulo.toLowerCase().indexOf('fórum') && elem.children[1] != undefined)
-                      descricao = elem.children[1].innerText
-                  else if(titulo.toLowerCase().indexOf('atividade') || titulo.toLowerCase().indexOf('lista') && elem.parentNode.children[2] != undefined)
-                      descricao = elem.parentNode.children[2].innerText
-                  else
-                      descricao = ""
+                  if(descriptionItem)
+                        descricao = descriptionItem.innerText   
 
                   // expressão regular para buscar data e hora dentro da descrição
                   const regex = /[0-9]{2}\/[0-9]{2}\/[0-9]{4} às ([0-9]{2}:[0-9]{2}|[0-9]h [0-9]|[0-9]{2}h [0-9]{2}|[0-9]h [0-9]{2}|[0-9]{2}h [0-9])/g
